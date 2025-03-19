@@ -8,9 +8,6 @@ import { UsersRepository } from './repository/users.repository';
 import { APP_PIPE } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 
-
-
-
 @Module({
   imports: [
     TypeOrmModule.forFeature([User]),
@@ -20,12 +17,14 @@ import { ValidationPipe } from '@nestjs/common';
     }),
   ],
   controllers: [UsersController],
-  providers: [UsersService, UsersRepository,
+  providers: [
+    UsersService,
+    UsersRepository,
     {
-    provide: APP_PIPE,
-    useClass: ValidationPipe
-  },
-],
+      provide: APP_PIPE,
+      useClass: ValidationPipe,
+    },
+  ],
   exports: [UsersService, UsersRepository],
 })
 export class UsersModule {}

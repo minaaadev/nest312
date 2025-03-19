@@ -32,7 +32,11 @@ export class UsersController {
 
   @Post('/login')
   @ApiOperation({ summary: '로그인', description: '사용자 로그인' })
-  @ApiResponse({ status: 200, description: '로그인 성공', type: LoginResponseDto })
+  @ApiResponse({
+    status: 200,
+    description: '로그인 성공',
+    type: LoginResponseDto,
+  })
   @ApiBody({ type: LoginUserDto })
   async login(@Body() dto: LoginUserDto): Promise<string> {
     const { name, password } = dto;
@@ -40,7 +44,10 @@ export class UsersController {
   }
 
   @Get('/:id')
-  @ApiOperation({ summary: '유저 조회', description: '특정 유저 정보 가져오기' })
+  @ApiOperation({
+    summary: '유저 조회',
+    description: '특정 유저 정보 가져오기',
+  })
   @ApiResponse({ status: 200, description: '특정 유저 정보' })
   async getUser(@Param('id') id: string) {
     return await this.usersService.getUserById(Number(id));
@@ -53,7 +60,10 @@ export class UsersController {
   }
 
   @Get('sync-status')
-  @ApiOperation({ summary: '동기화 상태 확인', description: '서버 동기화 상태 확인' })
+  @ApiOperation({
+    summary: '동기화 상태 확인',
+    description: '서버 동기화 상태 확인',
+  })
   checkSynchronizer() {
     return this.usersService.synchEnabled();
   }
